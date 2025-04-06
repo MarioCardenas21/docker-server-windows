@@ -1,0 +1,26 @@
+[global_tags]
+
+[agent]
+  interval = "10s"
+  round_interval = true
+  metric_batch_size = 1000
+  metric_buffer_limit = 10000
+  collection_jitter = "0s"
+  flush_interval = "10s"
+  flush_jitter = "0s"
+  precision = ""
+
+[[outputs.influxdb]]
+  urls = ["http://influxdb:8086"]
+  database = "docker_metrics"
+  retention_policy = ""
+  write_consistency = "any"
+  timeout = "5s"
+
+[[inputs.docker]]
+  endpoint = "unix:///var/run/docker.sock"
+  timeout = "5s"
+  container_names = []
+  gather_services = false
+  gather_container_size = false
+  gather_container_disk = false
